@@ -1,0 +1,27 @@
+<div class="auth-wrapper">
+    <div class="auth-card">
+        <h2>{{ isLogin ? 'Login' : 'Sign Up' }}</h2>
+        <form [formGroup]="isLogin ? loginForm : signupForm" (ngSubmit)="isLogin ? onLogin() : onSignup()">
+            <div *ngIf="isLogin">
+                <input type="text" formControlName="strPhone" placeholder="Email or Phone" class="form-control" />
+                <input type="password" formControlName="strPassword" placeholder="Password" class="form-control" />
+            </div>
+
+            <div *ngIf="!isLogin">
+                <input type="text" formControlName="strName" placeholder="Full Name" class="form-control" />
+                <input type="password" formControlName="strPassword" placeholder="Password" class="form-control" />
+                <input type="email" formControlName="strEmail" placeholder="Email (optional)" class="form-control" />
+                <input type="tel" formControlName="strPhone" placeholder="Phone (optional)" class="form-control" />
+                <div *ngIf="signupForm.hasError('atLeastOneRequired')" class="error-text">
+                    Email or Phone is required
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit">{{ isLogin ? 'Login' : 'Sign Up' }}</button>
+        </form>
+        <div class="toggle-link">
+            <span (click)="toggleForm()">{{ isLogin ? "Don't have an account? Sign Up" : "Already have an account?
+                Login" }}</span>
+        </div>
+    </div>
+</div>

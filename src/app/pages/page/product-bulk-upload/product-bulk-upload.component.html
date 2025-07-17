@@ -1,0 +1,25 @@
+<section>
+    <div class="page-title">{{ pageTitle }}</div>
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Products Bulk Upload</li>
+            </ol>
+        </nav>
+    </div>
+    <div>
+        <div class="upload-drop-area" (click)="fileInput.click()">
+            <input type="file" accept=".xlsx,.xls" (change)="onFileSelected($event)" #fileInput hidden />
+            <div class="drop-icon">📄</div>
+            <p class="drop-text">Drag & Drop your Excel file here<br /><span>or click to browse</span></p>
+        </div>
+
+        <div *ngIf="fileName" class="file-info mt-3">
+            <strong>✅ Selected File:</strong> {{ fileName }}
+        </div>
+        <div class="mt-3">
+            <button class="w-50" [disabled]="!selectedFile" (click)="fnOnSubmit()">Submit</button>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,62 @@
+<div class="container my-5">
+    <div class="row g-4">
+        <!-- Left: Cart Summary -->
+        <div class="col-lg-6">
+            <h4 class="mb-5">🛒 Your Cart</h4>
+
+            <div *ngIf="cartItems.length">
+                <div *ngFor="let item of cartItems"
+                    class="d-flex justify-content-between align-items-center mb-3 border-bottom p1-2">
+                    <div class="flex-grow-1">
+                        <div class="fw-semibold">{{ item.strName }}</div>
+                        <div class="text-muted small">Qty: {{ item.intQuantity }}</div>
+                    </div>
+
+                    <div class="text-nowrap text-end">
+                        <span class="fw-bold">₹{{ item.intActualPrice * item.intQuantity }}</span>
+                    </div>
+                </div>
+
+                <div class="text-end mt-4">
+                    <h5>Total: ₹{{ getTotalAmount() }}</h5>
+                </div>
+            </div>
+            <div *ngIf="!cartItems.length" class="fw-medium fs-4" style="opacity: 0.6;">
+                No items in your cart. <br>
+                Please add products to purchase.
+            </div>
+        </div>
+
+        <!-- Right: Customer Info Form -->
+        <div class="col-lg-6">
+            <h4 class="mb-3">🧾 Customer Details</h4>
+
+            <form (ngSubmit)="fnCheckout()" #checkoutForm="ngForm">
+                <div class="mb-3">
+                    <label class="form-label">Full Name</label>
+                    <input type="text" class="form-control" required [(ngModel)]="customer.name" name="name" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" required [(ngModel)]="customer.email" name="email" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Phone</label>
+                    <input type="tel" class="form-control" required [(ngModel)]="customer.phone" name="phone" />
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Address</label>
+                    <textarea rows="3" class="form-control" required [(ngModel)]="customer.address"
+                        name="address"></textarea>
+                </div>
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg">Proceed to Checkout</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

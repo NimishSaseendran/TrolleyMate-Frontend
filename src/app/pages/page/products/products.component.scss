@@ -1,0 +1,46 @@
+.pagination {
+    background-color: var(--surface-dark); // Optional wrapper bg
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+
+    .page-item {
+        margin: 0 2px;
+
+        .page-link {
+            background-color: var(--surface-dark);
+            color: var(--text-light);
+            border: 1px solid var(--border-dark);
+            transition: all 0.2s;
+
+            &:hover {
+                background-color: var(--blue-900);
+                color: #fff;
+            }
+        }
+
+        &.active .page-link {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: #fff;
+        }
+
+        &.disabled .page-link {
+            background-color: var(--surface-dark);
+            color: var(--text-dark);
+            border-color: var(--border-dark);
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.thead-dark-custom {
+    background-color: var(--surface-dark); // Or use a dark Bootstrap color like #2c2c2c
+    color: var(--text-light);
+
+    th {
+        border-bottom: 1px solid var(--border-dark);
+        font-weight: 600;
+        padding: 12px;
+    }
+}

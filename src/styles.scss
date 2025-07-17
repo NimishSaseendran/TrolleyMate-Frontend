@@ -1,1 +1,200 @@
-/* You can add global styles to this file, and also import other style files */
+/*=============================
+  🌙 Global Dark Mode Variables
+=============================*/
+
+:root {
+  --primary-color: #0066ff;
+
+  /* Extended Blue Ribbon Palette */
+  --blue-50: #edf8ff;
+  --blue-100: #d6efff;
+  --blue-200: #b5e4ff;
+  --blue-300: #83d5ff;
+  --blue-400: #48bcff;
+  --blue-500: #1e9aff;
+  --blue-600: #067aff;
+  --blue-700: #0066ff;
+  --blue-800: #084ec5;
+  --blue-900: #0d469b;
+  --blue-950: #0e2b5d;
+
+  /* Dark Mode */
+  --background-dark: #121212;
+  --surface-dark: #1e1e1e;
+  --text-light: #ffffff;
+  --text-muted: #cccccc;
+  --border-dark: #2a2a2a;
+}
+
+/*=============================
+  🌐 Global Base Styles
+=============================*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+  font-family: 'Segoe UI', sans-serif;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover {
+    background-color: var(--blue-600);
+  }
+
+  &:disabled {
+    background-color: var(--border-dark);
+    cursor: not-allowed;
+  }
+}
+
+.btn-primary {
+  background-color: #0e2b5d;
+  border: 1px solid #0e2b5d;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--surface-dark);
+  color: var(--text-light);
+  border: 1px solid var(--border-dark);
+  padding: 8px 12px;
+  border-radius: 4px;
+  outline: none;
+
+  &::placeholder {
+    color: var(--text-muted);
+  }
+
+  &:focus {
+    border-color: var(--primary-color);
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 1rem;
+}
+
+.card {
+  background-color: var(--surface-dark);
+  border: 1px solid var(--border-dark);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  color: var(--text-light);
+}
+
+/* === Global Table Styling for Dark Mode === */
+.table-dark {
+  background-color: var(--surface-dark);
+  color: var(--text-light);
+  border-color: var(--border-dark);
+
+  thead {
+    background-color: var(--surface-dark);
+    color: var(--text-light);
+
+    th {
+      white-space: nowrap;
+      padding: 12px;
+      font-weight: 600;
+      border-bottom: 1px solid var(--border-dark);
+    }
+  }
+
+  tbody {
+    td {
+      white-space: nowrap;
+      padding: 12px;
+      vertical-align: middle;
+      border-color: var(--border-dark);
+    }
+  }
+
+  th,
+  td {
+    min-width: 120px;
+    word-break: keep-all;
+  }
+}
+
+table {
+  padding-left: 12px !important;
+}
+
+table th:first-child,
+table td:first-child {
+  padding-left: 12px !important;
+}
+
+
+.breadcrumb-item+.breadcrumb-item::before {
+  content: var(--bs-breadcrumb-divider, "/");
+  color: #6c757d;
+  padding: 0 0.5rem;
+}
+
+.breadcrumb-item.active {
+  color: white !important;
+  font-weight: 600;
+}
+
+.page-title {
+  background-color: #252525;
+  padding: 12px;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+input.form-control,
+textarea.form-control,
+select.form-select {
+  background-color: var(--surface-color);
+  color: white;
+  border: 1px solid #444;
+  caret-color: white;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: var(--surface-color);
+    color: white;
+    border-color: #888;
+    box-shadow: 0 0 0 0.15rem rgba(255, 255, 255, 0.1);
+    outline: none;
+  }
+}
+
+input.form-control::placeholder,
+textarea.form-control::placeholder {
+  color: #aaaaaa !important;
+  opacity: 1;
+}

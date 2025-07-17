@@ -1,0 +1,166 @@
+<section>
+    <div class="page-title">{{ pageTitle }}</div>
+    <div class="card">
+        <form [formGroup]="productForm" (ngSubmit)="submitProduct()" novalidate>
+            <div class="row">
+                <!-- Product Name -->
+                <div class="col-md-6 mb-3">
+                    <label>Product Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter product name" formControlName="strName"
+                        [class.is-invalid]="productForm.get('strName')?.invalid && productForm.get('strName')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('strName')?.errors?.['required']">
+                        Product name is required.
+                    </div>
+                </div>
+
+                <!-- Selling Price -->
+                <div class="col-md-6 mb-3">
+                    <label>Selling Price <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="Enter selling price"
+                        formControlName="intSellingPrice"
+                        [class.is-invalid]="productForm.get('intSellingPrice')?.invalid && productForm.get('intSellingPrice')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('intSellingPrice')?.errors?.['required']">
+                        Selling price is required.
+                    </div>
+                </div>
+
+                <!-- Actual Price -->
+                <div class="col-md-6 mb-3">
+                    <label>Actual Price <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="Enter actual price"
+                        formControlName="intActualPrice"
+                        [class.is-invalid]="productForm.get('intActualPrice')?.invalid && productForm.get('intActualPrice')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('intActualPrice')?.errors?.['required']">
+                        Actual price is required.
+                    </div>
+                </div>
+
+                <!-- Category -->
+                <div class="col-md-6 mb-3">
+                    <label>Category <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter category" formControlName="strCategory"
+                        [class.is-invalid]="productForm.get('strCategory')?.invalid && productForm.get('strCategory')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('strCategory')?.errors?.['required']">
+                        Category is required.
+                    </div>
+                </div>
+
+                <!-- Brand -->
+                <div class="col-md-6 mb-3">
+                    <label>Brand</label>
+                    <input type="text" class="form-control" placeholder="Enter brand name" formControlName="strBrand" />
+                </div>
+
+                <!-- Unit -->
+                <div class="col-md-6 mb-3">
+                    <label>Unit</label>
+                    <input type="text" class="form-control" placeholder="e.g., pack, kg" formControlName="strUnit" />
+                </div>
+
+                <!-- Product Image -->
+                <div class="col-md-6 mb-3">
+                    <label>Product Image</label>
+                    <input type="file" class="form-control" (change)="onFileSelected($event)" />
+                </div>
+
+                <!-- Weight -->
+                <div class="col-md-6 mb-3">
+                    <label>Weight</label>
+                    <input type="text" class="form-control" placeholder="e.g., 250g" formControlName="strWeight" />
+                </div>
+
+                <!-- Discount Percentage -->
+                <div class="col-md-6 mb-3">
+                    <label>Discount Percentage</label>
+                    <input type="number" class="form-control" placeholder="Enter discount %"
+                        formControlName="intDiscountPercentage" />
+                </div>
+
+                <!-- Stock Quantity -->
+                <div class="col-md-6 mb-3">
+                    <label>Stock Quantity <span class="text-danger">*</span></label>
+                    <input type="number" class="form-control" placeholder="Enter available stock"
+                        formControlName="intStockQuantity"
+                        [class.is-invalid]="productForm.get('intStockQuantity')?.invalid && productForm.get('intStockQuantity')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('intStockQuantity')?.errors?.['required']">
+                        Stock quantity is required.
+                    </div>
+                </div>
+
+                <!-- Date Added -->
+                <div class="col-md-6 mb-3">
+                    <label>Date Added <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" formControlName="dateAddedDate"
+                        [class.is-invalid]="productForm.get('dateAddedDate')?.invalid && productForm.get('dateAddedDate')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('dateAddedDate')?.errors?.['required']">
+                        Date added is required.
+                    </div>
+                </div>
+
+                <!-- Expiry Date -->
+                <div class="col-md-6 mb-3">
+                    <label>Expiry Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control" formControlName="dateExpiryDate"
+                        [class.is-invalid]="productForm.get('dateExpiryDate')?.invalid && productForm.get('dateExpiryDate')?.touched" />
+                    <div class="invalid-feedback" *ngIf="productForm.get('dateExpiryDate')?.errors?.['required']">
+                        Expiry date is required.
+                    </div>
+                </div>
+
+                <!-- RFID Code -->
+                <div class="col-md-6 mb-3">
+                    <label>RFID Code</label>
+                    <input type="text" class="form-control" placeholder="Enter RFID code" formControlName="strRfid" />
+                </div>
+
+                <!-- Limit Per User -->
+                <div class="col-md-6 mb-3">
+                    <label>Limit Per User</label>
+                    <input type="number" class="form-control" placeholder="Enter limit per user"
+                        formControlName="intLimitPerUser" />
+                </div>
+
+                <!-- Tags -->
+                <div class="col-md-6 mb-3">
+                    <label>Tags <span class="text-danger">*</span></label>
+                    <div formArrayName="arrTags">
+                        <div *ngFor="let tag of arrTags.controls; let i = index" class="d-flex gap-2 mb-2">
+                            <input [formControlName]="i" class="form-control" placeholder="Enter tag"
+                                [class.is-invalid]="tag.invalid && tag.touched" />
+                            <button type="button" class="btn btn-outline-danger btn-sm"
+                                (click)="removeTag(i)">×</button>
+                        </div>
+                        <button type="button" class="btn btn-outline-primary btn-sm mt-1" (click)="addTag()">+ Add
+                            Tag</button>
+                    </div>
+                </div>
+
+                <!-- Availability -->
+                <div class="col-md-6 mb-3">
+                    <label>Availability</label>
+                    <select class="form-select" formControlName="blnIsAvailable">
+                        <option [ngValue]="true">Available</option>
+                        <option [ngValue]="false">Not Available</option>
+                    </select>
+                </div>
+
+                <!-- Description -->
+                <div class="col-12 mb-3">
+                    <label>Description <span class="text-danger">*</span></label>
+                    <textarea class="form-control" placeholder="Enter product description"
+                        formControlName="strDescription"
+                        [class.is-invalid]="productForm.get('strDescription')?.invalid && productForm.get('strDescription')?.touched"></textarea>
+                    <div class="invalid-feedback" *ngIf="productForm.get('strDescription')?.errors?.['required']">
+                        Description is required.
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="text-end">
+                    <button type="submit">{{ pageTitle }}</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>

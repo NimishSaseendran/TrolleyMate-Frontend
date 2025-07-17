@@ -1,0 +1,20 @@
+.layout-container {
+    display: flex;
+    height: 100vh;
+    background: var(--background-dark);
+    color: var(--text-light);
+    overflow: hidden;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+    background: var(--surface-dark);
+    color: var(--text-light);
+    overflow-y: auto;
+    transition: margin-left 0.3s ease;
+
+    &.expanded {
+        margin-left: 0;
+    }
+}

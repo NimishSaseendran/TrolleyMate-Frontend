@@ -1,0 +1,75 @@
+<section class="d-flex flex-column min-vh-100">
+    <div>
+        <div class="d-flex align-items-center justify-content-between p-3 pb-0">
+            <h2>Cart Items</h2>
+            <button (click)="fnResetProducts()" class="btn btn-primary">Reset Products</button>
+        </div>
+        <div class="p-3">
+            <div class="table-container">
+                <table *ngIf="arrProducts.length" class="table table-dark table-hover table-striped table-responsive"
+                    style="overflow: scroll;">
+                    <thead>
+                        <tr>
+                            <th>Sl No</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Count</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let product of arrProducts; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ product.id }}</td>
+                            <td>{{ product.name }}</td>
+                            <td class="d-flex">
+                                <button class="btn btn-secondary py-0" (click)="fnDecrementCount(product)">-</button>
+                                <input class="form-control mx-1" style="width: 50px; text-align: center;" type="number"
+                                    [(ngModel)]="product.count" (blur)="fnUpdateCount(product)" min="1" />
+                                <button class="btn btn-secondary py-0" (click)="fnIncrementCount(product)">+</button>
+                            </td>
+                            <td>{{ product.price }}</td>
+                            <td>{{ product.count * product.price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div *ngIf="!arrProducts.length" class="d-flex align-items-center justify-content-center rounded-3"
+                style="min-height: 50vh; background-color: #0e2b5d; color: #0066ff;">No data
+                to display
+                at the moment. Add products</div>
+        </div>
+    </div>
+    <div class="p-3 mt-auto text-white shadow" style="background-color: #262626;">
+        <h4 class="fw-bold">Order Summary</h4>
+        <div class="mb-2">Total Products: {{ arrProducts.length }}</div>
+        <div class="mb-2">Sub Total: {{ fnCalculateSubTotal() }}</div>
+        <button class="btn btn-primary d-grid w-100" (click)="fnCheckout()">Checkout</button>
+    </div>
+</section>
+
+<!-- <section class="d-flex flex-column min-vh-100">
+    <div>
+        <h2>Scanned Products</h2>
+
+        <button (click)="fnResetProducts()" class="btn btn-primary">Reset Products</button>
+
+        <table class="table table-dark table-hover table-striped table-responsive" style="overflow: scroll;">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of arrProducts">
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ product.count }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section> -->

@@ -1,0 +1,80 @@
+<section>
+    <div class="page-title">{{ pageTitle }}</div>
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a routerLink="/dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Products Bulk Upload</li>
+            </ol>
+        </nav>
+    </div>
+
+    <div>
+        <!-- Search Input -->
+        <div class="position-relative mb-4">
+            <!-- 🔍 Search Input -->
+            <input type="text" class="form-control" placeholder="Search product by name..." [(ngModel)]="searchTerm"
+                (input)="fnGetProductSearched()" (focus)="isDropdownOpen = true" (blur)="onBlurInput()"
+                autocomplete="off" />
+
+            <!-- 📋 Dropdown Product List -->
+            <ul class="list-group position-absolute w-100 shadow z-3 custom-scroll"
+                *ngIf="isDropdownOpen && arrProducts.length > 0" style="max-height: 250px; overflow-y: auto;">
+                <li class="list-group-item list-group-item-action bg-dark text-white d-flex 
+                    justify-content-between align-items-center p-3" *ngFor="let product of arrProducts"
+                    (mousedown)="fnSelectProduct(product)">
+                    <div>
+                        {{ product.strName }}
+                    </div>
+                    <div class="d-flex align-items-center gap-4">
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="text-decoration-line-through">₹{{ product.intSellingPrice }}</span>
+                            <span class="fw-semibold">₹{{ product.intActualPrice }}</span>
+                        </div>
+                        <i class="fa-solid fa-cart-shopping text-warning"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Selected Products Table -->
+        <div class="table-responsive" *ngIf="arrSelectedProducts.length > 0">
+            <table class="table table-dark table-borderless table-striped table-hover text-center align-middle">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Product Name</th>
+                        <th>Category</th>
+                        <th>Date Added</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let product of arrSelectedProducts; index as i">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ product.strName }}</td>
+                        <td>{{ product.strCategory || '-' }}</td>
+                        <td>{{ product.dateAddedDate | date: 'mediumDate' }}</td>
+                        <td>{{ product.intQuantity }}</td>
+                        <td>{{ product.intActualPrice | currency: 'INR' }}</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th colspan="4"></th>
+                        <th>{{ totalPrice | currency: 'INR' }}</th>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="mt-5">
+                <button class="w-100" (click)="fnProceedCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+
+        <!-- No Selected Products -->
+        <div *ngIf="arrSelectedProducts.length === 0" class="text-muted text-center">
+            No products selected.
+        </div>
+
+    </div>
+</section>
