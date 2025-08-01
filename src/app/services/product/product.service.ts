@@ -42,4 +42,12 @@ export class ProductService {
   updateProduct(obj: any, id: any): Observable<ProductResponse> {
     return this.http.put<ProductResponse>(`${this.baseUrl}/api/product/updateProduct/${id}`, obj)
   }
+
+  getAllCategories(obj: any): Observable<ProductResponse> {
+    return this.http.get<ProductResponse>(`${this.baseUrl}/api/category/getAllCategories`,
+      {
+        params: obj
+      }
+    )
+  }
 }
